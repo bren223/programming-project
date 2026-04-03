@@ -6,4 +6,4 @@
 #define PROJECT_IO_H
 
 #endif //PROJECT_IO_H
-int read(void);
+double read(void);
