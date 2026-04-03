@@ -2,14 +2,13 @@
 // Created by bj2-goodland on 02/04/2026.
 //
 #include <stdio.h>
-#include <string.h>
 #include "io.h" //link it to header
-#include <math.h>
+
 double read(void){
     FILE *fp= fopen("power_quality_log.csv","r"); //open the file
     if (fp == NULL){ //check if the file is empty
         printf("file reading error");
-        return 1.0;
+        return 1;
     }
     FILE *temp_fp = fopen("power_quality_log.csv","r"); //open the file
     int lines = -1;
@@ -30,5 +29,18 @@ double read(void){
         printf("%lf ", phase_A_voltage[i]);
     }
     fclose(fp); // close file
-    return 0.0;
+    double data[lines][8];
+
+    for (int i = 0; i < lines; i++) {
+        data[i][0] = timestamp[i];
+        data[i][1] = phase_A_voltage[i];
+        data[i][2] = phase_B_voltage[i];
+        data[i][3] = phase_C_voltage[i];
+        data[i][4] = line_current[i];
+        data[i][5] = frequency[i];
+        data[i][6] = power_factor[i];
+        data[i][7] = thd_percent[i];
+    }
+    printf("%lf",data[0][4]);
+    return 0;
 }
