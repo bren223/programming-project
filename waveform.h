@@ -4,7 +4,8 @@
 
 #ifndef PROJECT_WAVEFORM_H
 #define PROJECT_WAVEFORM_H
-
+#include "io.h"
+double V_RMS(data* data_pt);
 
 #endif //PROJECT_WAVEFORM_H
 
