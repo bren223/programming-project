@@ -2,6 +2,8 @@
 #include "io.h"
 
 int main() {
-    read();
+    data* data_pt = read(); // reads data and makes a struct with the data then passes the pointer
+    printf("%lf",data_pt->timestamp[3]);
+
     return 0;
 }

@@ -4,11 +4,11 @@
 #include <stdio.h>
 #include "io.h" //link it to header
 
-double read(void){
+data* read(void){
     FILE *fp= fopen("power_quality_log.csv","r"); //open the file
     if (fp == NULL){ //check if the file is empty
         printf("file reading error");
-        return 1;
+        //return 1;
     }
     FILE *temp_fp = fopen("power_quality_log.csv","r"); //open the file
     int lines = -1;
@@ -25,22 +25,24 @@ double read(void){
     while(fscanf(fp,"%lf,%lf,%lf,%lf,%lf,%lf,%lf,%lf",&timestamp[i],&phase_A_voltage[i],&phase_B_voltage[i],&phase_C_voltage[i],&line_current[i],&frequency[i],&power_factor[i],&thd_percent[i])==8){
         i++; // set the values in the array to the ones in the csv file
     }
-    for (int i = 0; i < lines; i++) {
-        printf("%lf ", phase_A_voltage[i]);
-    }
-    fclose(fp); // close file
-    double data[lines][8];
 
-    for (int i = 0; i < lines; i++) {
-        data[i][0] = timestamp[i];
-        data[i][1] = phase_A_voltage[i];
-        data[i][2] = phase_B_voltage[i];
-        data[i][3] = phase_C_voltage[i];
-        data[i][4] = line_current[i];
-        data[i][5] = frequency[i];
-        data[i][6] = power_factor[i];
-        data[i][7] = thd_percent[i];
+    fclose(fp); // close file
+
+    data file_data; // inisalize the struct
+
+    for (int i = 0; i < 1001; i++) { // set the arrays in the stuct to the file data
+        file_data.timestamp[i] = timestamp[i];
+        file_data.phase_A_voltage[i] = phase_A_voltage[i];
+        file_data.phase_B_voltage[i] = phase_B_voltage[i];
+        file_data.phase_C_voltage[i] = phase_C_voltage[i];
+        file_data.line_current[i] = line_current[i];
+        file_data.frequency[i] = frequency[i];
+        file_data.power_factor[i] = power_factor[i];
+        file_data.thd_percent[i] = thd_percent[i];
     }
-    printf("%lf",data[0][4]);
-    return 0;
+    printf("%lf",file_data.timestamp[1]);
+
+    data* pt = &file_data; // variable to pass the pointer
+
+    return pt;
 }
