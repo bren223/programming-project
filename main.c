@@ -6,7 +6,7 @@ int main() {
     data* data_pt = read(); // reads data and makes a struct with the data then passes the pointer
     printf("\n %lf",data_pt->timestamp[3]);
 
-    double V_RMS(data* data_pt);
+    V_RMS(data_pt);
 
     return 0;
 }
