@@ -45,3 +45,11 @@ data* read(void){
 
     return pt;
 }
+
+void write(){
+    FILE *Output = fopen("Output.txt","w");
+    fprintf(Output,"Wave Data \n"
+                   "Wave             /  WaveA /   WaveB /   WaveC \n "
+                   );
+    fclose(Output);
+}

@@ -18,4 +18,6 @@ typedef struct { // set up the struct to store the file data
 
 data* read(void);
 
+void write();
+
 #endif //PROJECT_IO_H
