@@ -18,6 +18,6 @@ typedef struct { // set up the struct to store the file data
 
 data* read(void);
 
-void write();
+void write(double Wave_RMS[3], double RMS_10[3], double Peak_to_Peak[3],double Wave_DCOff[3], int Clipamount[3], double ClipA[],double clipB[], double clipC[]);
 
 #endif //PROJECT_IO_H

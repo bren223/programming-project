@@ -46,10 +46,29 @@ data* read(void){
     return pt;
 }
 
-void write(){
+void write(double Wave_RMS[3], double RMS_10[3], double Peak_to_Peak[3],double Wave_DCOff[3], int Clipamount[3], double ClipA[],double ClipB[], double ClipC[]){
     FILE *Output = fopen("Output.txt","w");
     fprintf(Output,"Wave Data \n"
-                   "Wave             /  WaveA /   WaveB /   WaveC \n "
-                   );
+                   "Wave             /  WaveA /   WaveB /   WaveC \n ");
+    fprintf(Output,"RMS              / %lf / %lf / %lf \n ",Wave_RMS[0],Wave_RMS[1],Wave_RMS[2]);
+    fprintf(Output,"RMS+-10(1 = true)/ %lf / %lf / %lf \n",RMS_10[0],RMS_10[1],RMS_10[2]);
+    fprintf(Output,"Peak to Peak     / %lf / %lf / %lf \n",Peak_to_Peak[0],Peak_to_Peak[1],Peak_to_Peak[2]);
+    fprintf(Output,"DC offset        / %lf / %lf / %lf \n",Wave_DCOff[0],Wave_DCOff[1],Wave_DCOff[2]);
+
+    fprintf(Output,"Wave A cliped %d the times are: \n",Clipamount[0]);
+    for (int i = 0; i < Clipamount[0]; i++) {
+        fprintf(Output,"/ %lf ",ClipA[i]);
+    }
+
+    fprintf(Output,"\n Wave B cliped %d the times are: \n",Clipamount[1]);
+    for (int i = 0; i < Clipamount[1]; i++) {
+        fprintf(Output,"/ %lf ",ClipB[i]);
+    }
+
+    fprintf(Output,"\n Wave C cliped %d the times are: \n",Clipamount[2]);
+    for (int i = 0; i < Clipamount[2]; i++) {
+        fprintf(Output,"/ %lf ",ClipC[i]);
+    }
+
     fclose(Output);
 }

@@ -69,7 +69,7 @@ int main() {
     }
 
     char output[] = "hellow ";
-    write();
+    write(Wave_RMS,RMS_10, Peak_to_Peak,Wave_DCOff,Clipamount,ClipA,ClipB,ClipC);
 
     return 0;
 }
