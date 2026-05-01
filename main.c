@@ -5,19 +5,19 @@
 int main() {
     data* data_pt = read(); // reads data and makes a struct with the data then passes the pointer
 
-    double* RMS = V_RMS(data_pt);
-    double A_RMS = *RMS,B_RMS = *(RMS+1),C_RMS = *(RMS+2), RMS_10[3] = {*(RMS+3),*(RMS+4),*(RMS+5)};
+    double* RMS = V_RMS(data_pt); // run RMS function
+    double A_RMS = *RMS,B_RMS = *(RMS+1),C_RMS = *(RMS+2), RMS_10[3] = {*(RMS+3),*(RMS+4),*(RMS+5)}; // RMS values
 
-    double* Peak_to_Peak = PtoP(data_pt);
-    double A_PtoP = *Peak_to_Peak,B_PtoP = *(Peak_to_Peak+1),C_PtoP = *(Peak_to_Peak+2);
+    double* Peak_to_Peak = PtoP(data_pt); // run peak to peak function
+    double A_PtoP = *Peak_to_Peak,B_PtoP = *(Peak_to_Peak+1),C_PtoP = *(Peak_to_Peak+2); // peak to peak values
 
-    double* DCOff = DC_off(data_pt);
-    double A_DCOff = *DCOff,B_DCOff = *(DCOff+1),C_DCOff = *(DCOff+2);
+    double* DCOff = DC_off(data_pt); // run DC offset function
+    double A_DCOff = *DCOff,B_DCOff = *(DCOff+1),C_DCOff = *(DCOff+2); // DC offset values
 
-    double* Clip = clip(data_pt);
+    double* Clip = clip(data_pt); // run clip function
     int ClipAamount = 0,ClipBamount = 0,ClipCamount = 0;
 
-    for (int i = 0; i < 1000; i++)
+    for (int i = 0; i < 1000; i++) // find amount of times cliped
         if (*(Clip+i) > 0.0000 || *(Clip+i) < 0.0000 ){
             ClipAamount++;
         }
@@ -31,7 +31,7 @@ int main() {
         }
     double ClipA[ClipAamount],ClipB[ClipBamount],ClipC[ClipCamount];
     int a=0,b=0,c=0;
-    for (int i = 0; i < 1000; i++) {
+    for (int i = 0; i < 1000; i++) { // restric arrays to non 0 values
         if (*(Clip+i) > 0.0000 || *(Clip+i) < 0.0000 ) {
             ClipA[a] = *(Clip+i);
             a++;
@@ -46,7 +46,7 @@ int main() {
         }
     }
 
-    printf("\n Wave Data \n");
+    printf("\n Wave Data \n"); // print all values needed
     printf("Wave             /  WaveA /   WaveB /   WaveC \n ");
     printf("RMS              / %lf / %lf / %lf \n ",A_RMS,B_RMS,C_RMS);
     printf("RMS+-10(1 = true)/ %lf / %lf / %lf \n",RMS_10[0],RMS_10[1],RMS_10[2]);

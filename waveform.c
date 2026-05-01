@@ -60,14 +60,14 @@ double* DC_off(data* data_pt) {
         BSum = BSum + data_pt->phase_B_voltage[i];
         CSum = CSum + data_pt->phase_C_voltage[i];
     }
-    double DCOff[3] = { ASum/1000, BSum/1000, CSum/1000 };
+    double DCOff[3] = { ASum/1000, BSum/1000, CSum/1000 }; // calculate DC off set put them in an array to pass out
     double* Pt = DCOff;
     return Pt;
 }
 double* clip(data* data_pt) {
     double Aclip[1000] = {0}, Bclip[1000] = {0}, Cclip[1000] = {0};
     int AmountA = 0, AmountB = 0, AmountC = 0;
-    for (int i = 1; i < 1001; i++) {
+    for (int i = 1; i < 1001; i++) { // only set arrays with times with values over 324.9
         if (data_pt->phase_A_voltage[i] >= 324.9) {
             Aclip[AmountA] = data_pt->timestamp[i];
             AmountA++;
@@ -81,7 +81,7 @@ double* clip(data* data_pt) {
             AmountC++;
         }
     }
-    double clip[2][1000];
+    double clip[2][1000]; // compile into a 3D array to pass through
     for (int i = 0; i < 1001; i++) {
         clip[0][i] = Aclip[i];
         clip[1][i] = Bclip[i];
