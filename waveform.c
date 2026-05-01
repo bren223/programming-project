@@ -8,7 +8,6 @@
 
 double* V_RMS(data* data_pt){
 
-    printf("\n----------");
     double ASum = 0, BSum = 0, CSum  = 0;
     for (int i = 1; i < 1001; i++) { //sum all the numbers ^2
         ASum = ASum + pow(data_pt->phase_A_voltage[i],2);
@@ -25,12 +24,10 @@ double* V_RMS(data* data_pt){
     if (RMS[2] > 207 && RMS[1] < 253) {
         RMS[5] = 1;
     }
-    printf("\n %lf",RMS[4]);
     double* Pt = RMS; // pointer for array
     return Pt;
 }
 double* PtoP(data* data_pt) {
-    printf("\n----------");
     double AMax = 0, AMin = 0, BMax = 0, BMin = 0, CMax = 0, CMin = 0;
     for (int i = 1; i < 1001; i++) { //sort all the max and min of the waves
         if (data_pt->phase_A_voltage[i] > AMax) {
@@ -57,7 +54,6 @@ double* PtoP(data* data_pt) {
     return Pt;
 }
 double* DC_off(data* data_pt) {
-    printf("\n----------");
     double ASum = 0, BSum = 0, CSum  = 0;
     for (int i = 1; i < 1001; i++) { //sum all the numbers
         ASum = ASum + data_pt->phase_A_voltage[i];
@@ -69,7 +65,6 @@ double* DC_off(data* data_pt) {
     return Pt;
 }
 double* clip(data* data_pt) {
-    printf("\n----------");
     double Aclip[1000] = {0}, Bclip[1000] = {0}, Cclip[1000] = {0};
     int AmountA = 0, AmountB = 0, AmountC = 0;
     for (int i = 1; i < 1001; i++) {
@@ -93,7 +88,6 @@ double* clip(data* data_pt) {
         clip[2][i] = Cclip[i];
     }
 
-    printf("\n %lf",clip[0][0]);
     double* Pt = clip;
     return Pt;
 }

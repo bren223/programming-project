@@ -40,7 +40,6 @@ data* read(void){
         file_data.power_factor[i] = power_factor[i];
         file_data.thd_percent[i] = thd_percent[i];
     }
-    printf("%lf",file_data.timestamp[1]);
 
     data* pt = &file_data; // variable to pass the pointer
 
