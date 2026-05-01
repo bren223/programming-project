@@ -46,9 +46,9 @@ data* read(void){
     return pt;
 }
 
-void write(double Wave_RMS[3], double RMS_10[3], double Peak_to_Peak[3],double Wave_DCOff[3], int Clipamount[3], double ClipA[],double ClipB[], double ClipC[]){
-    FILE *Output = fopen("Output.txt","w");
-    fprintf(Output,"Wave Data \n"
+void write(double Wave_RMS[3], double RMS_10[3], double Peak_to_Peak[3],double Wave_DCOff[3], int Clipamount[3], double ClipA[],double ClipB[], double ClipC[]){ // passed data through
+    FILE *Output = fopen("Output.txt","w"); // open file
+    fprintf(Output,"Wave Data \n" // write data to file
                    "Wave             /  WaveA /   WaveB /   WaveC \n ");
     fprintf(Output,"RMS              / %lf / %lf / %lf \n ",Wave_RMS[0],Wave_RMS[1],Wave_RMS[2]);
     fprintf(Output,"RMS+-10(1 = true)/ %lf / %lf / %lf \n",RMS_10[0],RMS_10[1],RMS_10[2]);
@@ -70,5 +70,5 @@ void write(double Wave_RMS[3], double RMS_10[3], double Peak_to_Peak[3],double W
         fprintf(Output,"/ %lf ",ClipC[i]);
     }
 
-    fclose(Output);
+    fclose(Output); //close file
 }
