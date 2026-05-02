@@ -21,9 +21,10 @@ double* V_RMS(data* data_pt){
     if (RMS[1] > 207 && RMS[1] < 253) {
         RMS[4] = 1;
     }
-    if (RMS[2] > 207 && RMS[1] < 253) {
+    if (RMS[2] > 207 && RMS[2] < 253) {
         RMS[5] = 1;
     }
+
     double* Pt = RMS; // pointer for array
     return Pt;
 }
