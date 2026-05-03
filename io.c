@@ -3,6 +3,7 @@
 //
 #include <stdio.h>
 #include "io.h" //link it to header
+#include <stdlib.h>
 
 data* read(void){
     FILE *fp= fopen("power_quality_log.csv","r"); //open the file
@@ -28,22 +29,20 @@ data* read(void){
 
     fclose(fp); // close file
 
-    data file_data; // inisalize the struct
+    data *file_data = malloc(8004*sizeof(double)); // inisalize the struct using malloc to reserve the space for the struct
 
     for (int i = 0; i < 1001; i++) { // set the arrays in the stuct to the file data
-        file_data.timestamp[i] = timestamp[i];
-        file_data.phase_A_voltage[i] = phase_A_voltage[i];
-        file_data.phase_B_voltage[i] = phase_B_voltage[i];
-        file_data.phase_C_voltage[i] = phase_C_voltage[i];
-        file_data.line_current[i] = line_current[i];
-        file_data.frequency[i] = frequency[i];
-        file_data.power_factor[i] = power_factor[i];
-        file_data.thd_percent[i] = thd_percent[i];
+        file_data->timestamp[i] = timestamp[i];
+        file_data->phase_A_voltage[i] = phase_A_voltage[i];
+        file_data->phase_B_voltage[i] = phase_B_voltage[i];
+        file_data->phase_C_voltage[i] = phase_C_voltage[i];
+        file_data->line_current[i] = line_current[i];
+        file_data->frequency[i] = frequency[i];
+        file_data->power_factor[i] = power_factor[i];
+        file_data->thd_percent[i] = thd_percent[i];
     }
 
-    data* pt = &file_data; // variable to pass the pointer
-
-    return pt;
+    return file_data; // pass the struct pointer through
 }
 
 void write(double Wave_RMS[3], double RMS_10[3], double Peak_to_Peak[3],double Wave_DCOff[3], int Clipamount[3], double ClipA[],double ClipB[], double ClipC[]){ // passed data through
@@ -55,17 +54,17 @@ void write(double Wave_RMS[3], double RMS_10[3], double Peak_to_Peak[3],double W
     fprintf(Output,"Peak to Peak     / %lf / %lf / %lf \n",Peak_to_Peak[0],Peak_to_Peak[1],Peak_to_Peak[2]);
     fprintf(Output,"DC offset        / %lf / %lf / %lf \n",Wave_DCOff[0],Wave_DCOff[1],Wave_DCOff[2]);
 
-    fprintf(Output,"Wave A cliped %d the times are: \n",Clipamount[0]);
+    fprintf(Output,"Wave A clipped %d the times are: \n",Clipamount[0]);
     for (int i = 0; i < Clipamount[0]; i++) {
         fprintf(Output,"/ %lf ",ClipA[i]);
     }
 
-    fprintf(Output,"\n Wave B cliped %d the times are: \n",Clipamount[1]);
+    fprintf(Output,"\n Wave B clipped %d the times are: \n",Clipamount[1]);
     for (int i = 0; i < Clipamount[1]; i++) {
         fprintf(Output,"/ %lf ",ClipB[i]);
     }
 
-    fprintf(Output,"\n Wave C cliped %d the times are: \n",Clipamount[2]);
+    fprintf(Output,"\n Wave C clipped %d the times are: \n",Clipamount[2]);
     for (int i = 0; i < Clipamount[2]; i++) {
         fprintf(Output,"/ %lf ",ClipC[i]);
     }

@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include "io.h"
 #include "waveform.h"
+#include <stdlib.h>
 
 int main() {
     data* data_pt = read(); // reads data and makes a struct with the data then passes the pointer
@@ -53,23 +54,25 @@ int main() {
     printf("Peak to Peak     / %lf / %lf / %lf \n",Wave_PtoP[0],Wave_PtoP[1],Wave_PtoP[2]);
     printf("DC offset        / %lf / %lf / %lf \n",Wave_DCOff[0],Wave_DCOff[1],Wave_DCOff[2]);
 
-    printf("Wave A cliped %d the times are: \n",Clipamount[0]);
+    printf("Wave A clipped %d the times are: \n",Clipamount[0]);
     for (int i = 0; i < Clipamount[0]; i++) {
         printf("/ %lf ",ClipA[i]);
     }
 
-    printf("\n Wave B cliped %d the times are: \n",Clipamount[1]);
+    printf("\n Wave B clipped %d the times are: \n",Clipamount[1]);
     for (int i = 0; i < Clipamount[1]; i++) {
         printf("/ %lf ",ClipB[i]);
     }
 
-    printf("\n Wave C cliped %d the times are: \n",Clipamount[2]);
+    printf("\n Wave C clipped %d the times are: \n",Clipamount[2]);
     for (int i = 0; i < Clipamount[2]; i++) {
         printf("/ %lf ",ClipC[i]);
     }
 
     char output[] = "hellow ";
     write(Wave_RMS,RMS_10, Peak_to_Peak,Wave_DCOff,Clipamount,ClipA,ClipB,ClipC);
+
+    free(data_pt);
 
     return 0;
 }
